@@ -1,0 +1,12 @@
+<div class="weather__search-container">
+  <input
+    type="text"
+    placeholder="Enter a city"
+    (keyup.enter)="getWeatherData()"
+    [(ngModel)]="cityName"
+    (input)="onInputValueChange()"
+  />
+  <div (click)="getWeatherData()" class="weather__search-button">
+    <i class="fas fa-search fa-lg weather-search"></i>
+  </div>
+</div>

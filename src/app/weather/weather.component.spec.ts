@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { WeatherComponent } from './weather.component';
-
+import { SearchbarComponent } from '../searchbar/searchbar.component';
+import { WeatherWidgetComponent } from '../weather-widget/weather-widget.component';
 import { WeatherDataService } from '../weather-data.service';
 import { of, delay, switchMap, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,11 @@ describe('WeatherComponent', () => {
       'getWeatherData',
     ]);
     await TestBed.configureTestingModule({
-      declarations: [WeatherComponent],
+      declarations: [
+        WeatherComponent,
+        WeatherWidgetComponent,
+        SearchbarComponent,
+      ],
       imports: [FormsModule],
       providers: [
         { provide: WeatherDataService, useValue: weatherDataService },
@@ -31,17 +36,6 @@ describe('WeatherComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should update the cityName property when a user inputs a value into the search box', () => {
-    const searchBox = fixture.debugElement.query(By.css('input')).nativeElement;
-
-    searchBox.value = 'Paris';
-    searchBox.dispatchEvent(new Event('input'));
-
-    fixture.detectChanges();
-
-    expect(component.cityName).toBe('Paris');
   });
 
   it('should display error message when WeatherDataService returns an error', async () => {

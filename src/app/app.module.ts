@@ -7,9 +7,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { WeatherDataService } from './weather-data.service';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
 
 @NgModule({
-  declarations: [AppComponent, WeatherComponent],
+  declarations: [AppComponent, WeatherComponent, SearchbarComponent, WeatherWidgetComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [WeatherDataService],
   bootstrap: [AppComponent],

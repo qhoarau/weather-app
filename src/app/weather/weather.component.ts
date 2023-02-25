@@ -14,7 +14,7 @@ export class WeatherComponent {
 
   constructor(private weatherDataService: WeatherDataService) {}
 
-  setWeatherData(data: any): void {
+  setWeatherData = (data: any): void => {
     this.weatherData = {};
     this.weatherData.isDay = data.weather[0].icon.split('').includes('d');
     this.weatherData.temp_celcius = data.main.temp.toFixed(0);
@@ -24,25 +24,25 @@ export class WeatherComponent {
     this.weatherData.humidity = data.main.humidity.toFixed(0);
     this.weatherData.name = data.name;
     this.weatherData.icon = data.weather[0].icon;
-  }
+  };
 
-  getWeatherData(): void {
+  onInputValueChange = (inputValueFromChild: string) => {
+    this.cityName = inputValueFromChild;
+  };
+
+  getWeatherData = (): void => {
     this.isLoading = true;
     this.weatherDataService.getWeatherData(this.cityName).subscribe({
       next: (data: any) => {
         this.setWeatherData(data);
-        console.log('OK');
         this.isLoading = false;
         this.errorMessage = '';
       },
       error: (error: any) => {
-        console.log(error);
-        console.log(error.error.message);
         this.errorMessage = error.error.message;
         this.isLoading = false;
         this.weatherData = null;
-        console.log(this.errorMessage);
       },
     });
-  }
+  };
 }
