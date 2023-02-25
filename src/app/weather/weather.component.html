@@ -1,0 +1,100 @@
+<div class="weather__main-container">
+  <div class="weather__search-container">
+    <input
+      type="text"
+      placeholder="Enter a city"
+      (keyup.enter)="getWeatherData()"
+      [(ngModel)]="cityName"
+    />
+    <div (click)="getWeatherData()" class="weather__search-button">
+      <i class="fas fa-search fa-xl weather-search"></i>
+    </div>
+  </div>
+
+  <div class="weather__widget-container">
+    <div *ngIf="isLoading" class="weather__widget-row loader">
+      <i class="fa-solid fa-3x fa-spinner"></i>
+    </div>
+
+    <div *ngIf="!isLoading && weatherData">
+      <div *ngIf="weatherData.isDay" class="weather__widget-row">
+        <i class="fas fa-3x fa-sun weather__sun"></i>
+      </div>
+      <div *ngIf="!weatherData.isDay" class="weather__widget-row">
+        <i class="fas fa-3x fa-moon weather__moon"></i>
+      </div>
+
+      <div
+        *ngIf="
+          weatherData.icon == '01d' ||
+          weatherData.icon == '02d' ||
+          weatherData.icon == '03d' ||
+          weatherData.icon == '04d' ||
+          weatherData.icon == '01n' ||
+          weatherData.icon == '02n' ||
+          weatherData.icon == '03n' ||
+          weatherData.icon == '04n'
+        "
+        class="weather__widget-row weather__cloud-div"
+      >
+        <i class="fas fa-cloud fa-3x weather__cloud"></i>
+      </div>
+
+      <div
+        *ngIf="
+          weatherData.icon == '09d' ||
+          weatherData.icon == '09n' ||
+          weatherData.icon == '10n' ||
+          weatherData.icon == '10d'
+        "
+        class="weather__widget-row weather__cloud-div"
+      >
+        <i class="fas fa-cloud-showers-heavy fa-3x weather__cloud"></i>
+      </div>
+
+      <div
+        *ngIf="weatherData.icon == '11d' || weatherData.icon == '11n'"
+        class="weather__widget-row weather__cloud-div"
+      >
+        <i class="fas fa-cloud-bolt fa-3x weather__cloud"></i>
+      </div>
+
+      <div
+        *ngIf="weatherData.icon == '13d' || weatherData.icon == '13n'"
+        class="weather__widget-row weather__cloud-div"
+      >
+        <i class="fas fa-snowflake fa-3x weather__cloud"></i>
+      </div>
+
+      <div class="weather__widget-row big-text">
+        {{ weatherData.temp_celcius }}°
+      </div>
+      <div class="weather__widget-row small-text">
+        <div class="weather__widget-row__temp">
+          <i class="fa-solid fa-temperature-low"></i>{{ weatherData.temp_min }}°
+        </div>
+        /
+        <div class="weather__widget-row__temp">
+          <i class="fa-solid fa-temperature-full"></i
+          >{{ weatherData.temp_max }}°
+        </div>
+      </div>
+
+      <div class="weather__widget-row medium-text">
+        {{ weatherData.name }}
+      </div>
+
+      <div class="weather__widget-row">
+        <img
+          src="../../assets/droplet-percent-icon.png"
+          class="weather__droplet-img"
+        />
+        {{ weatherData.humidity }}%
+      </div>
+    </div>
+
+    <div class="error-message" *ngIf="errorMessage && !isLoading">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>
