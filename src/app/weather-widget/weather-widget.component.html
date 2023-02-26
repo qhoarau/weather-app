@@ -4,6 +4,7 @@
   <app-loader [isLoading]="isLoading"></app-loader>
 
   <div *ngIf="!isLoading && weatherData" data-test-id="widget-container">
+    <!-- Checking if it's day or not and display sun or moon -->
     <div *ngIf="weatherData.isDay" class="weather__widget-row">
       <i class="fas fa-3x fa-sun weather__sun"></i>
     </div>
@@ -11,6 +12,8 @@
       <i class="fas fa-3x fa-moon weather__moon"></i>
     </div>
 
+    <!-- Checking icon name case which tells us if it is cloudy, rainy, snowy etc... -->
+    <!-- Case cloudy -->
     <div
       *ngIf="
         weatherData.icon == '01d' ||
@@ -27,6 +30,7 @@
       <i class="fas fa-cloud fa-3x weather__cloud"></i>
     </div>
 
+    <!-- Case rainy -->
     <div
       *ngIf="
         weatherData.icon == '09d' ||
@@ -39,6 +43,7 @@
       <i class="fas fa-cloud-showers-heavy fa-3x weather__cloud"></i>
     </div>
 
+    <!-- Case thundery -->
     <div
       *ngIf="weatherData.icon == '11d' || weatherData.icon == '11n'"
       class="weather__widget-row weather__cloud-div"
@@ -46,6 +51,7 @@
       <i class="fas fa-cloud-bolt fa-3x weather__cloud"></i>
     </div>
 
+    <!-- Case snowy -->
     <div
       *ngIf="weatherData.icon == '13d' || weatherData.icon == '13n'"
       class="weather__widget-row weather__cloud-div"
@@ -53,9 +59,12 @@
       <i class="fas fa-snowflake fa-3x weather__cloud"></i>
     </div>
 
+    <!-- Current temperature -->
     <div class="weather__widget-row big-text" data-test-id="main-temp">
       {{ weatherData.temp_celcius }}°
     </div>
+
+    <!-- Min and max temperature -->
     <div class="weather__widget-row small-text">
       <div class="weather__widget-row__temp" data-test-id="min-temp">
         <i class="fa-solid fa-temperature-low"></i>{{ weatherData.temp_min }}°
@@ -66,10 +75,12 @@
       </div>
     </div>
 
+    <!-- City name -->
     <div class="weather__widget-row medium-text" data-test-id="city-name">
       {{ weatherData.name }}
     </div>
 
+    <!-- Humidity percentage -->
     <div class="weather__widget-row" data-test-id="humidity">
       <img
         src="../../assets/droplet-percent-icon.png"
@@ -78,6 +89,7 @@
       {{ weatherData.humidity }}%
     </div>
   </div>
+
   <!-- error component -->
   <app-error-message
     [errorMessage]="errorMessage"
