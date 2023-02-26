@@ -4,6 +4,8 @@ import { AppComponent } from './app.component';
 import { WeatherComponent } from './weather/weather.component';
 import { SearchbarComponent } from './searchbar/searchbar.component';
 import { WeatherWidgetComponent } from './weather-widget/weather-widget.component';
+import { LoaderComponent } from './loader/loader.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -16,6 +18,8 @@ describe('AppComponent', () => {
         WeatherComponent,
         SearchbarComponent,
         WeatherWidgetComponent,
+        LoaderComponent,
+        ErrorMessageComponent,
       ],
     }).compileComponents();
   });

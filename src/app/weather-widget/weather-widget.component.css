@@ -13,14 +13,6 @@
     padding: 1rem;
 }
 
-.loader {
-    animation-name: spinner;
-    animation-iteration-count: infinite;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    vertical-align: middle;
-}
-
 .weather__widget-row__temp {
     padding: 0 0.5rem;
 }
@@ -87,15 +79,5 @@
 
     to {
         margin-left: 65px;
-    }
-}
-
-@keyframes spinner {
-    from {
-        transform: rotate(0);
-    }
-
-    to {
-        transform: rotate(360deg);
     }
 }

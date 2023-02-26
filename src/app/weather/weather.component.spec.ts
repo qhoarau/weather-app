@@ -1,11 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { WeatherComponent } from './weather.component';
 import { SearchbarComponent } from '../searchbar/searchbar.component';
 import { WeatherWidgetComponent } from '../weather-widget/weather-widget.component';
+import { LoaderComponent } from '../loader/loader.component';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { WeatherDataService } from '../weather-data.service';
-import { of, delay, switchMap, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 
 describe('WeatherComponent', () => {
@@ -22,6 +23,8 @@ describe('WeatherComponent', () => {
         WeatherComponent,
         WeatherWidgetComponent,
         SearchbarComponent,
+        LoaderComponent,
+        ErrorMessageComponent,
       ],
       imports: [FormsModule],
       providers: [
