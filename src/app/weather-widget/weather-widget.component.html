@@ -1,4 +1,6 @@
+<!-- component that display weather data -->
 <div class="weather__widget-container">
+  <!-- loader component -->
   <app-loader [isLoading]="isLoading"></app-loader>
 
   <div *ngIf="!isLoading && weatherData" data-test-id="widget-container">
@@ -76,7 +78,7 @@
       {{ weatherData.humidity }}%
     </div>
   </div>
-
+  <!-- error component -->
   <app-error-message
     [errorMessage]="errorMessage"
     [isLoading]="isLoading"

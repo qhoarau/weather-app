@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./loader.component.css'],
 })
 export class LoaderComponent {
+  // is loading data from services boolean
   @Input() isLoading: boolean;
 }

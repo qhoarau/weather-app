@@ -36,7 +36,6 @@
     font-size: medium;
     color: #fff;
     border: 0;
-    -webkit-appearance: none
 }
 
 .weather__search-container input:focus {

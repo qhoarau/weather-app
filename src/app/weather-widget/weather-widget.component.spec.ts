@@ -28,6 +28,7 @@ describe('WeatherWidgetComponent', () => {
   });
 
   it('should display data if weatherData is set', () => {
+    // Init component variables
     component.weatherData = {
       name: 'London',
       temp_celcius: '13',
@@ -41,8 +42,10 @@ describe('WeatherWidgetComponent', () => {
     component.isLoading = false;
     component.errorMessage = '';
 
+    // Detect new component variables
     fixture.detectChanges();
 
+    // get html elements
     const mainTempElement = fixture.debugElement.query(
       By.css('div[data-test-id="main-temp"]')
     ).nativeElement;
@@ -63,6 +66,7 @@ describe('WeatherWidgetComponent', () => {
       By.css('div[data-test-id="humidity"]')
     ).nativeElement;
 
+    // Perform tests
     expect(mainTempElement.innerHTML).toContain(
       component.weatherData.temp_celcius
     );
@@ -70,53 +74,5 @@ describe('WeatherWidgetComponent', () => {
     expect(maxTempElement.innerHTML).toContain(component.weatherData.temp_max);
     expect(cityNameElement.innerHTML).toContain(component.weatherData.name);
     expect(humidityElement.innerHTML).toContain(component.weatherData.humidity);
-  });
-
-  // it('should display spinner if loading', () => {
-  //   component.weatherData = null;
-  //   component.isLoading = true;
-  //   component.errorMessage = '';
-
-  //   fixture.detectChanges();
-
-  //   const loadingElement = fixture.debugElement.query(
-  //     By.css('div[data-test-id="loader"]')
-  //   );
-
-  //   const widgetElement = fixture.debugElement.query(
-  //     By.css('div[data-test-id="widget-container"]')
-  //   );
-
-  //   const errorElement = fixture.debugElement.query(
-  //     By.css('div[data-test-id="error-message"]')
-  //   );
-
-  //   expect(loadingElement).toBeTruthy();
-  //   expect(errorElement).toBeNull();
-  //   expect(widgetElement).toBeNull();
-  // });
-
-  it('should display error if no weatherData and not loading and errorMessage is set', () => {
-    component.weatherData = null;
-    component.isLoading = false;
-    component.errorMessage = 'An error occured';
-
-    fixture.detectChanges();
-
-    const loadingElement = fixture.debugElement.query(
-      By.css('div[data-test-id="loader"]')
-    );
-
-    const widgetElement = fixture.debugElement.query(
-      By.css('div[data-test-id="widget-container"]')
-    );
-
-    const errorElement = fixture.debugElement.query(
-      By.css('div[data-test-id="error-message"]')
-    );
-
-    expect(loadingElement).toBeNull();
-    expect(widgetElement).toBeNull();
-    expect(errorElement).toBeTruthy();
   });
 });

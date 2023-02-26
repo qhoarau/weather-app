@@ -22,26 +22,34 @@ describe('LoaderComponent', () => {
   });
 
   it('should display spinner if loading', () => {
+    // Init component variables
     component.isLoading = true;
 
+    // Detect new component variables
     fixture.detectChanges();
 
+    // Get html element
     const loadingElement = fixture.debugElement.query(
       By.css('div[data-test-id="loader"]')
     );
 
+    // Perform tests
     expect(loadingElement).toBeTruthy();
   });
 
   it('should not display spinner if not loading', () => {
+    // Init component variables
     component.isLoading = false;
 
+    // Detect new component variables
     fixture.detectChanges();
 
+    // Get html element
     const loadingElement = fixture.debugElement.query(
       By.css('div[data-test-id="loader"]')
     );
 
+    // Perform tests
     expect(loadingElement).toBeNull();
   });
 });

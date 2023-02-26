@@ -6,6 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./error-message.component.css'],
 })
 export class ErrorMessageComponent {
+  // error message to show
   @Input() errorMessage: string;
+
+  // is loading data from services boolean
   @Input() isLoading: boolean;
 }

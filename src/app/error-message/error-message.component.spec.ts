@@ -22,27 +22,37 @@ describe('ErrorMessageComponent', () => {
   });
 
   it('should display error if errorMessage is set and not loading', () => {
+    // Init component variables
     component.errorMessage = 'An error occured';
     component.isLoading = false;
+
+    // Detect new component variables
     fixture.detectChanges();
 
+    // Get html element
     const errorElement = fixture.debugElement.query(
       By.css('div[data-test-id="error-message"]')
     ).nativeElement;
 
+    // Perform tests
     expect(errorElement).toBeTruthy();
     expect(errorElement.innerHTML).toContain(component.errorMessage);
   });
 
   it('should not display error if errorMessage is not set', () => {
+    // Init component variables
     component.errorMessage = '';
     component.isLoading = false;
+
+    // Detect new component variables
     fixture.detectChanges();
 
+    // Get html element
     const errorElement = fixture.debugElement.query(
       By.css('div[data-test-id="error-message"]')
     );
 
-    expect(errorElement).toBeTruthy();
+    // Perform tests
+    expect(errorElement).toBeNull();
   });
 });

@@ -42,28 +42,37 @@ describe('WeatherComponent', () => {
   });
 
   it('should display error message when WeatherDataService returns an error', async () => {
+    // Init variables
     const errorMessage = {
       error: {
         message: 'An error occurred',
       },
     };
+
+    // Mock API response
     weatherDataService.getWeatherData.and.returnValue(
       throwError(() => errorMessage)
     );
 
+    // Init component variables
     component.cityName = 'invalid-city-name';
 
+    // Perform the fake request
     component.getWeatherData();
 
+    // Wait for fake API response
     await fixture.whenStable();
 
+    // Detect changes
     fixture.detectChanges();
 
+    // Perform tests
     expect(component.weatherData).toBeNull();
     expect(component.errorMessage).toBe(errorMessage.error.message);
   });
 
   it('should display weather data when WeatherDataService returns data', async () => {
+    // Init variables
     const weatherData = {
       weather: [
         {
@@ -87,15 +96,22 @@ describe('WeatherComponent', () => {
       name: 'London',
     };
 
+    // Mock API response
     weatherDataService.getWeatherData.and.returnValue(of(weatherData));
 
+    // Init component variables
     component.cityName = 'London';
+
+    // Perform the fake request
     component.getWeatherData();
 
+    // Wait for fake API response
     await fixture.whenStable();
 
+    // Detect changes
     fixture.detectChanges();
 
+    // Perform tests
     expect(component.weatherData).toEqual({
       name: 'London',
       temp_celcius: '13',

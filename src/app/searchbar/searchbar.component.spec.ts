@@ -23,13 +23,17 @@ describe('SearchbarComponent', () => {
   });
 
   it('should update the cityName property when a user inputs a value into the search box', () => {
+    //Get html element
     const searchBox = fixture.debugElement.query(By.css('input')).nativeElement;
 
+    // fire input event
     searchBox.value = 'Paris';
     searchBox.dispatchEvent(new Event('input'));
 
+    // Detect new input value
     fixture.detectChanges();
 
+    // Perform tests
     expect(component.cityName).toBe('Paris');
   });
 });
