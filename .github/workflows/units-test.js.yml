@@ -25,7 +25,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-      - run: sudo apt install chromium-browser
       - run: npm ci
       - run: npm run build --if-present
-      - run: export CHROME_BIN=/usr/bin/chromium-browser CI=true npm run test-headless
+      - run: CI=true npm test
+      - env:
+          CI: true
