@@ -43,6 +43,6 @@ describe('ErrorMessageComponent', () => {
       By.css('div[data-test-id="error-message"]')
     );
 
-    expect(errorElement).toBeNull();
+    expect(errorElement).toBeTruthy();
   });
 });
