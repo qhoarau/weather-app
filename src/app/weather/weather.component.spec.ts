@@ -8,6 +8,8 @@ import { ErrorMessageComponent } from '../error-message/error-message.component'
 import { WeatherDataService } from '../weather-data.service';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import OWAPIResponse from '../models/OWAPIResponse';
+import weatherData from '../models/weatherData';
 
 describe('WeatherComponent', () => {
   let component: WeatherComponent;
@@ -73,7 +75,11 @@ describe('WeatherComponent', () => {
 
   it('should display weather data when WeatherDataService returns data', async () => {
     // Init variables
-    const weatherData = {
+    const weatherData: OWAPIResponse = {
+      coord: {
+        lon: 10.99,
+        lat: 44.34,
+      },
       weather: [
         {
           id: 501,
@@ -84,16 +90,39 @@ describe('WeatherComponent', () => {
       ],
       base: 'stations',
       main: {
-        temp: 12.5,
-        feels_like: 11,
-        temp_min: 10,
-        temp_max: 14,
+        temp: 298.48,
+        feels_like: 298.74,
+        temp_min: 297.56,
+        temp_max: 300.05,
         pressure: 1015,
         humidity: 64,
         sea_level: 1015,
         grnd_level: 933,
       },
-      name: 'London',
+      visibility: 10000,
+      wind: {
+        speed: 0.62,
+        deg: 349,
+        gust: 1.18,
+      },
+      rain: {
+        '1h': 3.16,
+      },
+      clouds: {
+        all: 100,
+      },
+      dt: 1661870592,
+      sys: {
+        type: 2,
+        id: 2075663,
+        country: 'IT',
+        sunrise: 1661834187,
+        sunset: 1661882248,
+      },
+      timezone: 7200,
+      id: 3163858,
+      name: 'Zocca',
+      cod: 200,
     };
 
     // Mock API response
@@ -111,16 +140,19 @@ describe('WeatherComponent', () => {
     // Detect changes
     fixture.detectChanges();
 
-    // Perform tests
-    expect(component.weatherData).toEqual({
-      name: 'London',
-      temp_celcius: '13',
-      temp_feels_like: '11',
-      humidity: '64',
-      temp_min: '10',
-      temp_max: '14',
+    // Expected results
+    const expectedResult: weatherData = {
+      name: weatherData.name,
+      temp_celcius: weatherData.main.temp.toFixed(0).toString(),
+      temp_feels_like: weatherData.main.feels_like.toFixed(0).toString(),
+      humidity: weatherData.main.humidity.toFixed(0).toString(),
+      temp_min: weatherData.main.temp_min.toFixed(0).toString(),
+      temp_max: weatherData.main.temp_max.toFixed(0).toString(),
       isDay: true,
       icon: '10d',
-    });
+    };
+
+    // Perform tests
+    expect(component.weatherData).toEqual(expectedResult);
   });
 });

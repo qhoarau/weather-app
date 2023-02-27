@@ -29,7 +29,7 @@ describe('ErrorMessageComponent', () => {
     // Detect new component variables
     fixture.detectChanges();
 
-    // Get html element
+    // Get html elements
     const errorElement = fixture.debugElement.query(
       By.css('div[data-test-id="error-message"]')
     ).nativeElement;

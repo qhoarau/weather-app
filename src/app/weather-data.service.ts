@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import OWAPIResponse from './models/OWAPIResponse';
+import Error from './models/Error';
 
 @Injectable({
   providedIn: 'root',
@@ -13,13 +15,13 @@ export class WeatherDataService {
 
   constructor(private http: HttpClient) {}
 
-  getWeatherData(cityName: string): Observable<any> {
+  getWeatherData(cityName: string): Observable<OWAPIResponse> {
     // Replace city param with user input
     const url = this.apiUrl.replace('{city}', cityName);
 
     // Return response
     return this.http
-      .get<any>(url)
-      .pipe(catchError((error) => throwError(() => error)));
+      .get<OWAPIResponse>(url)
+      .pipe(catchError((error: Error) => throwError(() => error)));
   }
 }

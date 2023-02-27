@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { WeatherDataService } from '../weather-data.service';
-
+import OWAPIResponse from '../models/OWAPIResponse';
+import Error from '../models/Error';
 @Component({
   selector: 'app-weather',
   templateUrl: './weather.component.html',
@@ -22,9 +23,9 @@ export class WeatherComponent {
   constructor(private weatherDataService: WeatherDataService) {}
 
   // Set weather data object and map property from API response
-  setWeatherData = (data: any): void => {
+  setWeatherData = (data: OWAPIResponse): void => {
     this.weatherData = {};
-    // checking id it's day or night to display sun or moon
+    // checking if it's day or night to display sun or moon (icon name must include 'd' for day 'n' for night)
     this.weatherData.isDay = data.weather[0].icon.split('').includes('d');
     this.weatherData.temp_celcius = data.main.temp.toFixed(0);
     this.weatherData.temp_min = data.main.temp_min.toFixed(0);
@@ -46,7 +47,8 @@ export class WeatherComponent {
     // set is loading to true
     this.isLoading = true;
     this.weatherDataService.getWeatherData(this.cityName).subscribe({
-      next: (data: any) => {
+      next: (data: OWAPIResponse) => {
+        console.log(data);
         // set weather data object with api response
         this.setWeatherData(data);
         // set is loading to false
@@ -54,7 +56,7 @@ export class WeatherComponent {
         // no error message
         this.errorMessage = '';
       },
-      error: (error: any) => {
+      error: (error: Error) => {
         // set error message
         this.errorMessage = error.error.message;
         // set is loading to false
