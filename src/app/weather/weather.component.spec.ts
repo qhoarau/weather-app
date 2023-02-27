@@ -9,7 +9,7 @@ import { WeatherDataService } from '../weather-data.service';
 import { of, throwError } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import OWAPIResponse from '../models/OWAPIResponse';
-import weatherData from '../models/weatherData';
+import WeatherData from '../models/WeatherData';
 
 describe('WeatherComponent', () => {
   let component: WeatherComponent;
@@ -141,7 +141,7 @@ describe('WeatherComponent', () => {
     fixture.detectChanges();
 
     // Expected results
-    const expectedResult: weatherData = {
+    const expectedResult: WeatherData = {
       name: weatherData.name,
       temp_celcius: weatherData.main.temp.toFixed(0).toString(),
       temp_feels_like: weatherData.main.feels_like.toFixed(0).toString(),
